@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Form Registration</title>
+        <link rel="stylesheet" href="stylecss.css">
+    </head>
+
+    <body>
+        <div class="box">
+            <div class="form">
+                <h2>Form Registration</h2>
+                <form>
+                    <div class="inputbox">
+                        <span> Name </span>
+                        <input type="text" value="" id="name" required>
+                    </div>
+                    <div class="inputbox">
+                        <span> Surname </span>
+                        <input type="text" value="" id="surname" required>
+                    </div>
+                    <div class="inputbox">
+                        <span> Email </span>
+                        <input type="email" value="" id="email" required>
+                    </div>
+                    <div class="inputbox">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                          <option value="">Select</option>
+                          <option value="female">Female</option>
+                          <option value="male">Male</option>
+                          <option value="other">Other</option>
+                        </select>
+                        </div>
+                    <div class="inputbox">
+                        <span> Strengths</span>
+                        <textarea class="textarea" value="" id="strengths" required></textarea>
+                    </div>
+                    <div class="inputbox">
+                        <span> Weaknesses </span>
+                        <textarea class="textarea" value="" id="weaknesses" required></textarea>
+                    </div>
+
+                    <input type="submit" value="submit" class="sub" id="submit">
+                </form>
+            </div>
+        </div>
+        
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+        <script type="module">
+        // Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+
+ // Your web app's Firebase configuration
+ // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+ const firebaseConfig = {
+apiKey: "AIzaSyBByvOby0YbRJvdiKGIS2LOhoLFiOTkN7s",
+authDomain: "regisform-a1888.firebaseapp.com",
+projectId: "regisform-a1888",
+storageBucket: "regisform-a1888.appspot.com",
+messagingSenderId: "19635563360",
+appId: "1:19635563360:web:1511b8f14f589671b1cc05"       
+ };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  const db = getDatabase(app);
+
+  document.getElementById("submit").addEventListener('click', function(e){
+
+    e.preventDefault();
+
+    set(ref(db, 'name/' + document.getElementById("name").value),
+    {
+
+        name: document.getElementById("name").value,
+        surname: document.getElementById("surname").value, 
+        email: document.getElementById("email").value,
+        gender: document.getElementById("gender").value,
+        strengths: document.getElementById("strengths").value,
+        weaknesses: document.getElementById("weaknesses").value
+        
+        });
+    
+        alert("Login Successfull !");
+        })
+
+        </script>
+    </body>
+</html>
